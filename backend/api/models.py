@@ -2,16 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import BLANK_CHOICE_DASH
 
-
-
-
 class Product(models.Model):
-    user = models.ForeignKey(User,on_delete=models.SET_NULL, null=True),
-    nome = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True,blank=True,default="/images/placeholder.png", upload_to='images/'),
+    user = models.ForeignKey(User,on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    image = models.ImageField(null=True,blank=True,default="/images/placeholder.png", upload_to='images/')
     brand = models.CharField(max_length=200, null=True, blank=True)
-    category = models.CharField(max_length=200, null=True, blank=True),
-    description = models.TextField(null=False,blank=True),
+    category = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(null=False,blank=True)
     rating = models.DecimalField(max_digits=12, decimal_places=2,null=True,blank=True)
     numReviews = models.ImageField(null=True, blank=True, default=0)
     price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
@@ -37,9 +34,9 @@ class Review(models.Model):
 class Order(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     paymentMethod = models.CharField(max_length=200, null=True, blank=True)
-    taxPrice = models.DecimalField(max_length=12, decimal_places=2,null=True, blank=True)
-    shippingPrice = models.DecimalField(max_length=12, decimal_places=2,null=True, blank=True)
-    totalPrice = models.DecimalField(max_length=12, decimal_places=2,null=True, blank=True)
+    taxPrice = models.DecimalField(max_digits=12, decimal_places=2,null=True, blank=True)
+    shippingPrice = models.DecimalField(max_digits=12, decimal_places=2,null=True, blank=True)
+    totalPrice = models.DecimalField(max_digits=12, decimal_places=2,null=True, blank=True)
     isPaid = models.BooleanField(default=False)
     paidAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     isDeliver = models.BooleanField(default=False)

@@ -61,3 +61,15 @@ class OrderItem(models.Model):
     
     def __str__(self) -> str:
         return str(self.name)
+
+class ShippingAddress(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True,blank=True)
+    postalCode = models.CharField(max_length=200, null=True,blank=False)
+    country = models.CharField(max_length=200,null=True, blank=True)
+    shippingPrice = models.DecimalField(max_digits=12,decimal_places=2, null=True,blank=True)
+    _id = models.AutoField(primary_key=True,editable=False)
+    
+    def __str__(self) -> str:
+        return str(self.address)
